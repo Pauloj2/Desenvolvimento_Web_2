@@ -1,9 +1,39 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>Plantio</title>
-</head>
-<body>
-    <h1>Olá, esta é a página de Plantio!</h1>
-</body>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="ISO-8859-1" />
+    <title>Listagem de Plantios</title>
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Listagem de Plantios</h1>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Nome</th>
+            <th scope="col">Data de Plantio</th>
+            <th scope="col">Data de Colheita</th>
+            <th scope="col">Quantidade de Sementes</th>
+            <th scope="col">Produtividade</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="plantio : ${plantiosList}">
+            <td th:text="${plantio.nome}"></td>
+            <td th:text="${plantio.dataPlantio}"></td>
+            <td th:text="${plantio.dataColheita}"></td>
+            <td th:text="${plantio.quantidadeSementes}"></td>
+            <td th:text="${plantio.produtividade}"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
 </html>
