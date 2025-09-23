@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import com.example.desenvWebll.model.Plantio;
 import com.example.desenvWebll.service.PlantioService;
@@ -31,6 +32,12 @@ public class PlantioController {
     @PostMapping("/plantio/save")
     public String postMethodName(@ModelAttribute("plantio") Plantio plantio) {
         plantioService.savePlantio(plantio);
+        return "redirect:/plantio";
+    }
+
+    @GetMapping("/plantio/delete/{id}")
+    public String delete(@PathVariable Long id) {
+        this.plantioService.deletePlantioById(id);
         return "redirect:/plantio";
     }
 }

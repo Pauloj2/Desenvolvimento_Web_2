@@ -22,6 +22,7 @@
             <th scope="col">Data de Colheita</th>
             <th scope="col">Quantidade de Sementes</th>
             <th scope="col">Produtividade</th>
+            <th scope="col">Excluir</th>
           </tr>
         </thead>
         <tbody>
@@ -31,6 +32,9 @@
             <td th:text="${plantio.dataColheita}"></td>
             <td th:text="${plantio.quantidadeSementes}"></td>
             <td th:text="${plantio.produtividade}"></td>
+            <td>
+              <a th:href="@{/plantio/delete/{id}(id=${plantio.id})}">Deletar</a>
+            </td>
           </tr>
         </tbody>
       </table>
