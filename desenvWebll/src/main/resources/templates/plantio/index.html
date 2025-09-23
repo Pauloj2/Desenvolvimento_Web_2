@@ -23,17 +23,21 @@
             <th scope="col">Quantidade de Sementes</th>
             <th scope="col">Produtividade</th>
             <th scope="col">Excluir</th>
+            <th scope="col">Editar</th>
           </tr>
         </thead>
         <tbody>
           <tr th:each="plantio : ${plantiosList}">
             <td th:text="${plantio.nome}"></td>
-            <td th:text="${plantio.dataPlantio}"></td>
-            <td th:text="${plantio.dataColheita}"></td>
+            <td th:text="${#temporals.format(plantio.dataPlantio, 'dd/MM/yyyy')}"></td>
+            <td th:text="${#temporals.format(plantio.dataColheita, 'dd/MM/yyyy')}"></td>
             <td th:text="${plantio.quantidadeSementes}"></td>
             <td th:text="${plantio.produtividade}"></td>
             <td>
               <a th:href="@{/plantio/delete/{id}(id=${plantio.id})}">Deletar</a>
+            </td>
+            <td>
+              <a th:href="@{/plantio/edit/{id}(id=${plantio.id})}">Editar</a>
             </td>
           </tr>
         </tbody>

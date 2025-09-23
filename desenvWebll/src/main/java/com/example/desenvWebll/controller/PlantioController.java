@@ -40,4 +40,11 @@ public class PlantioController {
         this.plantioService.deletePlantioById(id);
         return "redirect:/plantio";
     }
+
+    @GetMapping("/plantio/edit/{id}")
+    public String edit(@PathVariable Long id, Model model) {
+        Plantio plantio = plantioService.getPlantioById(id);
+        model.addAttribute("plantio", plantio);
+        return "plantio/edit";
+    }
 }
