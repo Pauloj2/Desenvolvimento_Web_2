@@ -1,33 +1,30 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 
-<head>
-    <meta charset="UTF-8" />
-    <title>Cadastrar Plantio</title>
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
-</head>
+<th:block th:replace="~{/../fragments/head :: head('Cadastrar Plantio')}"></th:block>
 
 <body>
+    <!-- Cabeçalho -->
+    <th:block th:replace="~{/../fragments/head :: header}"></th:block>
+
     <div class="container pt-5">
         <h1>Cadastrar Plantio</h1>
-        <form th:action="@{/plantio/save}" th:object="${plantio}" method="POST">
+        <form th:action="@{/plantio/save}" th:object="${plantio}" method="POST" novalidate>
 
             <div class="form-group row">
                 <label for="nome" class="col-sm-2 col-form-label">Nome</label>
                 <div class="col-sm-10">
                     <input type="text" th:field="*{nome}" class="form-control" id="nome"
                         placeholder="Digite o nome do plantio">
-                    <p th:if="${#fields.hasErrors('nome')}" th:errorclass="text-danger" th:errors="*{nome}"></p>
+                    <p th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="text-danger"></p>
                 </div>
             </div>
+
             <div class="form-group row">
                 <label for="dataPlantio" class="col-sm-2 col-form-label">Data do Plantio</label>
                 <div class="col-sm-10">
                     <input type="date" th:field="*{dataPlantio}" class="form-control" id="dataPlantio">
-                    <p th:if="${#fields.hasErrors('dataPlantio')}" th:errorclass="text-danger"
-                        th:errors="*{dataPlantio}"></p>
+                    <p th:if="${#fields.hasErrors('dataPlantio')}" th:errors="*{dataPlantio}" class="text-danger"></p>
                 </div>
             </div>
 
@@ -35,8 +32,7 @@
                 <label for="dataColheita" class="col-sm-2 col-form-label">Data da Colheita</label>
                 <div class="col-sm-10">
                     <input type="date" th:field="*{dataColheita}" class="form-control" id="dataColheita">
-                    <p th:if="${#fields.hasErrors('dataColheita')}" th:errorclass="text-danger"
-                        th:errors="*{dataColheita}"></p>
+                    <p th:if="${#fields.hasErrors('dataColheita')}" th:errors="*{dataColheita}" class="text-danger"></p>
                 </div>
             </div>
 
@@ -45,8 +41,7 @@
                 <div class="col-sm-10">
                     <input type="number" step="0.01" th:field="*{quantidadeSementes}" class="form-control"
                         id="quantidadeSementes" placeholder="Ex: 10.5">
-                    <p th:if="${#fields.hasErrors('quantidadeSementes')}" th:errorclass="text-danger"
-                        th:errors="*{quantidadeSementes}"></p>
+                    <p th:if="${#fields.hasErrors('quantidadeSementes')}" th:errors="*{quantidadeSementes}" class="text-danger"></p>
                 </div>
             </div>
 
@@ -55,14 +50,15 @@
                 <div class="col-sm-10">
                     <input type="number" step="0.01" th:field="*{produtividade}" class="form-control" id="produtividade"
                         placeholder="Ex: 200.75">
-                    <p th:if="${#fields.hasErrors('produtividade')}" th:errorclass="text-danger"
-                        th:errors="*{produtividade}"></p>
+                    <p th:if="${#fields.hasErrors('produtividade')}" th:errors="*{produtividade}" class="text-danger"></p>
                 </div>
             </div>
 
             <button type="submit" class="btn btn-success">Cadastrar Plantio</button>
         </form>
     </div>
-</body>
 
+    <!-- Rodapé -->
+    <th:block th:replace="~{/../fragments/footer :: footer}"></th:block>
+</body>
 </html>

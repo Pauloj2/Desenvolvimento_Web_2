@@ -1,18 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 
-<head>
-  <meta charset="ISO-8859-1" />
-  <title>Listagem de Plantios</title>
-
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous" />
-</head>
+<th:block th:replace="~{/../fragments/head :: head('Listar Plantio')}"></th:block>
 
 <body>
   <div class="container">
-    <div class="container pt-5">
-      <a th:href="@{/plantio/create}">Cadastrar Plantio</a>
+    <th:block th:replace="~{/../fragments/head :: header}"></th:block>
+    <div class="container">
       <h1>Listagem de Plantio</h1>
       <table class="table table-striped">
         <thead>
@@ -34,15 +28,21 @@
             <td th:text="${plantio.quantidadeSementes}"></td>
             <td th:text="${plantio.produtividade}"></td>
             <td>
-              <a th:href="@{/plantio/delete/{id}(id=${plantio.id})}">Deletar</a>
+              <a th:href="@{/plantio/edit/{id}(id=${plantio.id})}">Editar</a>
             </td>
             <td>
-              <a th:href="@{/plantio/edit/{id}(id=${plantio.id})}">Editar</a>
+              <a th:href="@{/product/delete/{id}(id=${product.id})}">Deletar</a>
             </td>
           </tr>
         </tbody>
       </table>
+      <div class="row">
+        <a th:href="@{/product/create}">
+          <button class="btn btn-primary">Cadastrar Produto</button>
+        </a>
+      </div>
     </div>
+    <th:block th:replace="~{/../fragments/footer :: footer}"></th:block>
 </body>
 
 </html>
