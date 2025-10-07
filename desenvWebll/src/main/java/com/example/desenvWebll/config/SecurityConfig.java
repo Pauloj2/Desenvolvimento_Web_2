@@ -31,7 +31,7 @@ public class SecurityConfig {
                 .requestMatchers("/home", "/register", "/saveUser").permitAll()
                 .anyRequest().authenticated())
                 .formLogin(login -> login
-                        .defaultSuccessUrl("/product", true))
+                        .defaultSuccessUrl("/plantio", true))
                 .logout(logout -> logout
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout")))
                 .exceptionHandling(handling -> handling
