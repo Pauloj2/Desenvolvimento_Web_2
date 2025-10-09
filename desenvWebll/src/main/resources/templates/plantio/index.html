@@ -38,7 +38,7 @@
       </table>
       <div class="row">
         <a th:href="@{/plantio/create}">
-          <button class="btn btn-primary">Cadastrar Produto</button>
+          <button sec:authorize="hasAuthority('Admin')" class="btn btn-primary">Cadastrar Plantio</button>
         </a>
       </div>
     </div>

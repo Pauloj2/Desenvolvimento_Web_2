@@ -18,35 +18,36 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 public class SecurityConfig {
 
-    @Autowired
-    private UserDetailsService uds;
+        @Autowired
+        private UserDetailsService uds;
 
-    @Autowired
-    private BCryptPasswordEncoder encoder;
+        @Autowired
+        private BCryptPasswordEncoder encoder;
 
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        @Bean
+        public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-        http.authorizeHttpRequests(requests -> requests
-                .requestMatchers("/home", "/register", "/saveUser").permitAll()
-                .anyRequest().authenticated())
-                .formLogin(login -> login
-                        .defaultSuccessUrl("/plantio", true))
-                .logout(logout -> logout
-                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout")))
-                .exceptionHandling(handling -> handling
-                        .accessDeniedPage("/accessDenied"))
-                .authenticationProvider(authenticationProvider());
+                http.authorizeHttpRequests(requests -> requests
+                                .requestMatchers("/home", "/register", "/saveUser").permitAll()
+                                .requestMatchers("/product/*").hasAuthority("Admin")
+                                .anyRequest().authenticated())
+                                .formLogin(login -> login
+                                                .defaultSuccessUrl("/", true))
+                                .logout(logout -> logout
+                                                .logoutRequestMatcher(new AntPathRequestMatcher("/logout")))
+                                .exceptionHandling(handling -> handling
+                                                .accessDeniedPage("/accessDenied"))
+                                .authenticationProvider(authenticationProvider());
 
-        return http.build();
+                return http.build();
 
-    }
+        }
 
-    @Bean
-    public AuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-        authenticationProvider.setUserDetailsService(uds);
-        authenticationProvider.setPasswordEncoder(encoder);
-        return authenticationProvider;
-    }
+        @Bean
+        public AuthenticationProvider authenticationProvider() {
+                DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+                authenticationProvider.setUserDetailsService(uds);
+                authenticationProvider.setPasswordEncoder(encoder);
+                return authenticationProvider;
+        }
 }
