@@ -83,12 +83,12 @@ public class PlantioControllerTest {
 
     @Test
     @WithMockUser(username = "aluno@iftm.edu.br", authorities = { "Admin" })
-    @DisplayName("GET /plantio/create - Exibe formulário de criação para admin")
+    @DisplayName("GET /plantio/ - Exibe link de acesso ao form de cadastro de produto")
     void testCreateFormAuthorizedUser() throws Exception {
-        mockMvc.perform(get("/plantio/create"))
+        when(plantioService.getAllPlantios()).thenReturn(testCreatePlantioList());
+        mockMvc.perform(get("/plantio"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("plantio/create"))
-                .andExpect(model().attributeExists("plantio"))
+                .andExpect(view().name("plantio/index"))
                 .andExpect(content().string(containsString("Cadastrar Plantio")));
     }
 
@@ -98,10 +98,9 @@ public class PlantioControllerTest {
     void testCreateFormNotAuthorizedUser() throws Exception {
         when(plantioService.getAllPlantios()).thenReturn(testCreatePlantioList());
 
-        mockMvc.perform(get("/plantio/create"))
+        mockMvc.perform(get("/plantio"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("plantio/create"))
-                .andExpect(model().attributeExists("plantio"))
+                .andExpect(view().name("plantio/index"))
                 .andExpect(content().string(
                         not(containsString("<a class=\"dropdown-item\" href=\"/plantio/create\">Cadastrar</a>"))));
     }
