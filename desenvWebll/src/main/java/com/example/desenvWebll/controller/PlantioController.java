@@ -27,7 +27,7 @@ public class PlantioController {
     @GetMapping("/plantio/create")
     public String create(Model model) {
         model.addAttribute("plantio", new Plantio());
-        return "plantio/create";
+        return "plantio/form";
     }
 
     @PostMapping("/plantio/save")
@@ -36,7 +36,7 @@ public class PlantioController {
         System.out.println(plantio);
         if (result.hasErrors()) {
             model.addAttribute("plantio", plantio);
-            return "plantio/create";
+            return "plantio/form";
         }
 
         plantioService.savePlantio(plantio);
@@ -53,6 +53,6 @@ public class PlantioController {
     public String edit(@PathVariable Long id, Model model) {
         Plantio plantio = plantioService.getPlantioById(id);
         model.addAttribute("plantio", plantio);
-        return "plantio/edit";
+        return "plantio/form";
     }
 }

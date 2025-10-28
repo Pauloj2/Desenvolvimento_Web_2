@@ -115,7 +115,7 @@ public class PlantioControllerTest {
                 .with(csrf())
                 .flashAttr("plantio", plantio))
                 .andExpect(status().isOk())
-                .andExpect(view().name("plantio/create"))
+                .andExpect(view().name("plantio/form"))
                 .andExpect(model().attributeHasErrors("plantio"));
 
         verify(plantioService, never()).savePlantio(any(Plantio.class));
